@@ -21,4 +21,14 @@ describe Monster do
       monster.valid?.must_equal true
     end
   end
+
+  describe "#name" do
+    it "should return the nickname, if set" do
+      monster.name.must_equal "Misty's Staryu"
+    end
+
+    it "should return the species name, if no nickname is set" do
+      monsters(:wild_absol).name.must_equal "Absol"
+    end
+  end
 end
