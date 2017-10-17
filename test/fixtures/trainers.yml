@@ -1,0 +1,7 @@
+misty:
+  name: Misty
+  trainer_class: Gym Leader
+
+astrid:
+  name: Astrid
+  trainer_class: Ace Trainer
