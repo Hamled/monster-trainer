@@ -1,0 +1,7 @@
+misty_staryu:
+  species: staryu
+  nickname: Misty's Staryu
+  trainer: misty
+
+wild_absol:
+  species: absol

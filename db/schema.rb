@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171017232058) do
+ActiveRecord::Schema.define(version: 20171017233434) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "monsters", force: :cascade do |t|
+    t.bigint "species_id", null: false
+    t.string "nickname"
+    t.bigint "trainer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["species_id"], name: "index_monsters_on_species_id"
+    t.index ["trainer_id"], name: "index_monsters_on_trainer_id"
+  end
 
   create_table "species", force: :cascade do |t|
     t.string "name", null: false
