@@ -1,0 +1,7 @@
+staryu:
+  name: Staryu
+  species_type: Water
+
+absol:
+  name: Absol
+  species_type: Dark
