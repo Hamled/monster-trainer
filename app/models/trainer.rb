@@ -6,7 +6,7 @@ class Trainer < ApplicationRecord
 
   # Capture a wild monster, optionally giving it a nickname
   def capture!(monster, nickname: nil)
-    raise MonsterCaptureError if monster.trainer.present?
+    raise MonsterCaptureError if monster.captured?
 
     # Set the nickname (will unset existing value if nickname is not given)
     monster.nickname = nickname
