@@ -5,4 +5,8 @@ class Monster < ApplicationRecord
   def name
     nickname || species.name
   end
+
+  def captured?
+    trainer.present?
+  end
 end

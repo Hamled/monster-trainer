@@ -31,4 +31,14 @@ describe Monster do
       monsters(:wild_absol).name.must_equal "Absol"
     end
   end
+
+  describe "#captured?" do
+    it "should return true when trainer is set" do
+      monsters(:misty_staryu).captured?.must_equal true
+    end
+
+    it "should return false when trainer is not set" do
+      monsters(:wild_absol).captured?.must_equal false
+    end
+  end
 end
