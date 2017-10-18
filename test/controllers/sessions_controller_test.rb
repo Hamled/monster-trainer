@@ -24,5 +24,17 @@ describe SessionsController do
         end
       }.wont_change "User.count"
     end
+
+    it "should create a new trainer if user does not have one" do
+      proc {
+        login_github(user)
+      }.must_change "Trainer.count", 1
+    end
+
+    it "should not create a new trainer for existing users" do
+      proc {
+        login_github(users(:user_with_trainer))
+      }.wont_change "Trainer.count"
+    end
   end
 end

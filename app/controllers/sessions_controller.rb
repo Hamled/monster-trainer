@@ -12,6 +12,15 @@ class SessionsController < ApplicationController
       return redirect_to root_path
     end
 
+    # This should really be done through a form, but I lack the time to implement that
+    if user.trainer.nil?
+      Trainer.create!(
+        name: auth_hash[:info][:nickname],
+        trainer_class: "Monster Trainer",
+        user: user
+      )
+    end
+
     session[:user_id] = user.id
     flash[:success] = "Successfully logged in"
     redirect_to root_path
