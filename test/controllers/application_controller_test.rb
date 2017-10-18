@@ -36,4 +36,25 @@ describe ApplicationController do
       @controller.logged_in?.must_equal false
     end
   end
+
+  describe "#current_trainer" do
+    it "should return trainer when logged in" do
+      user = users(:github_user)
+
+      # First log into the site
+      login_github(user)
+
+      # Make sure we update this variable with latest from DB
+      user.reload
+
+      @controller.current_trainer.must_equal user.trainer
+    end
+
+    it "should return nil when not logged in" do
+      # Don't log into the site, but DO make a request
+      get root_path
+
+      @controller.current_trainer.must_be_nil
+    end
+  end
 end

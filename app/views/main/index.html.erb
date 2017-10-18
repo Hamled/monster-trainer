@@ -1,4 +1,7 @@
 <h1>Welcome to Monster Trainer!</h1>
 
-<%# This should be removed when user authentication is implemented %>
-<p><%= link_to "View Sabrina's collection", trainer_path(Trainer.first) %></p>
+<% if logged_in? %>
+  <p><%= link_to "View your monster collection", trainer_path(current_trainer) %></p>
+<% else %>
+  <p><%= link_to "Please log in with GitHub", '/auth/github' %></p>
+<% end %>

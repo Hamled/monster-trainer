@@ -10,4 +10,9 @@ class ApplicationController < ActionController::Base
   def logged_in?
     current_user.present?
   end
+
+  helper_method :current_trainer
+  def current_trainer
+    current_user.trainer if logged_in?
+  end
 end
