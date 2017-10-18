@@ -1,4 +1,5 @@
 class Trainer < ApplicationRecord
+  belongs_to :user, required: false
   has_many :monsters
 
   validates :name, presence: true

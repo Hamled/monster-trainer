@@ -1,3 +1,7 @@
 github_user:
   uid: 123456
   provider: github
+
+user_with_trainer:
+  uid: 123457
+  provider: github

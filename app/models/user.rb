@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_one :trainer
+
   # UID must be present and must be unique for a given provider
   validates :uid, presence: true, uniqueness: { scope: :provider }
 

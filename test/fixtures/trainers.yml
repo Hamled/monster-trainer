@@ -1,6 +1,7 @@
 misty:
   name: Misty
   trainer_class: Gym Leader
+  user: user_with_trainer
 
 astrid:
   name: Astrid

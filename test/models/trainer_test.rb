@@ -56,4 +56,14 @@ describe Trainer do
       }.must_raise MonsterCaptureError
     end
   end
+
+  describe "#user" do
+    it "should return the associated user" do
+      trainer.user.must_equal users(:user_with_trainer)
+    end
+
+    it "should return nil with no associated user" do
+      trainers(:astrid).user.must_be_nil
+    end
+  end
 end
