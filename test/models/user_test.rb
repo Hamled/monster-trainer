@@ -24,4 +24,35 @@ describe User do
       user2.valid?.must_equal false
     end
   end
+
+  describe ".find_or_create_by_github" do
+    let(:existing_auth_hash) { OmniAuth::AuthHash.new(auth_hash(user)) }
+    let(:new_auth_hash) { OmniAuth::AuthHash.new(auth_hash_github) }
+    let(:invalid_auth_hash) { OmniAuth::AuthHash.new({ provider: "github", uid: nil }) }
+
+    it "should return a existing users" do
+      proc {
+        User.find_or_create_by_github(existing_auth_hash).must_equal user
+      }.wont_change "User.count"
+    end
+
+    it "should create and return new users" do
+      proc {
+        new_user = User.find_or_create_by_github(new_auth_hash)
+
+        new_user.must_be_kind_of User
+        new_user.persisted?.must_equal true
+      }.must_change "User.count", 1
+    end
+
+    it "should not create a user if auth hash is invalid" do
+      proc {
+        invalid_user = User.find_or_create_by_github(invalid_auth_hash)
+
+        invalid_user.must_be_kind_of User
+        invalid_user.valid?.must_equal false
+        invalid_user.persisted?.must_equal false
+      }.wont_change "User.count"
+    end
+  end
 end
