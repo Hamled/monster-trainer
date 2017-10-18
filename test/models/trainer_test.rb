@@ -49,5 +49,11 @@ describe Trainer do
       # Monster now has the given nickname
       wild_monster.nickname.must_equal "Astrid's Absol"
     end
+
+    it "should raise an error for already-captured monsters" do
+      proc {
+        trainer.capture!(captured_monster)
+      }.must_raise MonsterCaptureError
+    end
   end
 end
