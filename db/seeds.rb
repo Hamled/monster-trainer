@@ -1,7 +1,35 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+# Make sure we log to the terminal as well as log/development.log
+Rails.logger = Logger.new(STDOUT)
+
+# Create a trainer
+sabrina = Trainer.create!(
+  name: "Sabrina",
+  trainer_class: "Gym Leader"
+)
+
+Rails.logger.info "Seeded trainer: Sabrina"
+
+# Create some species
+[
+  { name: "Dratini", species_type: "Dragon" },
+  { name: "Alakazam", species_type: "Psychic"},
+  { name: "Typhlosion", species_type: "Fire" }
+].each do |attrs|
+  species = Species.create!(attrs)
+
+  Rails.logger.info "Seeded species: #{species.name}"
+end
+
+# Create some captured monsters
+[
+  { species: "Alakazam", nickname: "Sabrina's Alakazam" },
+  { species: "Typhlosion", nickname: "Sabrina's Typhlosion" }
+].each do |attrs|
+  monster = Monster.create!(
+    species: Species.find_by(name: attrs[:species]),
+  )
+
+  sabrina.capture!(monster, nickname: attrs[:nickname])
+
+  Rails.logger.info "Seeded captured monster: #{monster.name}"
+end
