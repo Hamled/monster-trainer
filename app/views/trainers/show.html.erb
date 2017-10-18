@@ -1,0 +1,19 @@
+<h1><%= @trainer.name %>'s Monster Collection</h1>
+
+<table>
+  <thead>
+    <th>Name</th>
+    <th>Species</th>
+    <th>Type</th>
+    <th>Captured On</th>
+  </thead>
+
+  <% @trainer.monsters.each do |monster| %>
+    <tr>
+      <td><%= monster.name %></td>
+      <td><%= monster.species.name %></td>
+      <td><%= monster.species.species_type %></td>
+      <td><%= monster.created_at.to_s(:long) %></td>
+    </tr>
+  <% end %>
+</table>
