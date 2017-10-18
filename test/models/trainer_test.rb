@@ -14,4 +14,14 @@ describe Trainer do
       trainer.valid?.must_equal false
     end
   end
+
+  describe "#monsters" do
+    it "should return a collection of monsters" do
+      trainer.monsters.must_be_kind_of Enumerable
+    end
+
+    it "should include monsters captured by this trainer" do
+      trainer.monsters.must_include monsters(:misty_staryu)
+    end
+  end
 end
