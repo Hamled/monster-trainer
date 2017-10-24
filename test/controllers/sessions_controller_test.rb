@@ -8,6 +8,7 @@ describe SessionsController do
       login_github(user)
 
       session[:user_id].must_equal user.id
+      flash.keys.must_include "success"
       must_redirect_to root_path
     end
 
