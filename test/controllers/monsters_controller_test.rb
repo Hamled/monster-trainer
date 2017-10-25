@@ -43,13 +43,25 @@ describe MonstersController do
     describe "when not authenticated" do
       # For all of these test we are not authenticated, so we
       # should NOT log in first
-      before do
-      end
 
       it "should not remove captured monsters" do
+        proc {
+          delete monster_path(captured_monster)
+        }.wont_change 'Monster.count'
+
+        must_respond_with :redirect
+        must_redirect_to root_path
+        flash.keys.must_include "error"
       end
 
       it "should not remove wild monsters" do
+        proc {
+          delete monster_path(wild_monster)
+        }.wont_change 'Monster.count'
+
+        must_respond_with :redirect
+        must_redirect_to root_path
+        flash.keys.must_include "error"
       end
     end
   end
