@@ -16,9 +16,17 @@ describe MonstersController do
       # For all of these tests we need to be authenticated
       # so we should always log in first.
       before do
+        login_github(users(:user_with_trainer))
       end
 
       it "should remove if monster is captured by trainer" do
+        proc {
+          delete monster_path(captured_monster)
+        }.must_change 'Monster.count', -1
+
+        must_respond_with :redirect
+        must_redirect_to root_path
+        flash.keys.must_include "success"
       end
 
       it "should not remove wild monsters" do
