@@ -12,6 +12,13 @@ class LogosController < ApplicationController
     return render_404 unless @logo_url.present?
   end
 
+  def search
+    query = params[:query]
+    return render :search unless query.present?
+
+    redirect_to logo_path(query)
+  end
+
   private
 
   def render_404
