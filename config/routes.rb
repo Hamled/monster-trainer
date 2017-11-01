@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   resources :monsters, only: [:destroy]
 
   get '/auth/github/callback', to: 'sessions#create', as: :auth_callback_github
+
+  get '/logos/:company_name', to: 'logos#show', as: :logo
 end
