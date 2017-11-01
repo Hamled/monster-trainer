@@ -3,6 +3,8 @@ require File.expand_path("../../config/environment", __FILE__)
 require "rails/test_help"
 require "minitest/rails"
 require "minitest/reporters"  # for Colorized output
+require 'vcr'
+require 'webmock/minitest'
 
 #  For colorful output!
 Minitest::Reporters.use!(
@@ -52,5 +54,19 @@ class ActiveSupport::TestCase
     OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(auth_hash)
 
     get auth_callback_github_path
+  end
+end
+
+# VCR setup
+VCR.configure do |config|
+  config.cassette_library_dir = 'test/cassettes'
+  config.hook_into :webmock
+  config.default_cassette_options = {
+    record: :new_episodes,
+    match_requests_on: [:method, :uri, :body]
+  }
+
+  config.filter_sensitive_data("<CLEARBIT API KEY>") do
+    ENV['CLEARBIT_API_KEY']
   end
 end
