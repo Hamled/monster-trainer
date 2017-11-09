@@ -4,14 +4,22 @@ describe ClearbitWrapper do
   describe "#domain_search" do
     it "returns a domain name for known companies" do
       VCR.use_cassette("domain_search") do
-        ClearbitWrapper.domain_search("Intel").must_equal "intel.com"
-        ClearbitWrapper.domain_search("Ada Developers Academy").must_equal "adadevelopersacademy.org"
+        # Arrange
+        name = "Del Taco"
+
+        # Act
+        result = ClearbitWrapper.domain_search(name)
+
+        # Assert
+        result.must_equal "deltacofranchise.com"
       end
     end
 
     it "returns nil for unknown companies" do
       VCR.use_cassette("domain_search") do
-        ClearbitWrapper.domain_search("Not A Real Company I Hope").must_be_nil
+        name = "This is not a real company"
+        result = ClearbitWrapper.domain_search(name)
+        result.must_equal nil
       end
     end
   end
